@@ -4,7 +4,7 @@ export const GET_ALL_TEAMS_SUCCESS = 'GET_ALL_TEAM_SUCCESS';
 export const UPDATE_TEAM_SUCCESS = 'UPDATE_TEAM_SUCCESS';
 export const DELETE_TEAM_SUCCESS = 'DELETE_TEAM_SUCCESS';
 
-const host = 'http://localhost:5000/api';
+const host = 'https://userhub-server.onrender.com';
 
 // Action Creators
 export const createTeamSuccess = (team) => ({
@@ -38,7 +38,7 @@ export const deleteTeamSuccess = (teamId) => ({
 export const getAllTeams = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${host}/teams`); // Assuming you have an endpoint to fetch all teams
+      const response = await fetch(`${host}/api/teams`); // Assuming you have an endpoint to fetch all teams
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -55,7 +55,7 @@ export const getAllTeams = () => {
 export const createTeam = ({name='',userIds=[]}) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${host}/teams/createteam`, {
+      const response = await fetch(`${host}/api/teams/createteam`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ export const createTeam = ({name='',userIds=[]}) => {
 export const getTeamById = (teamId) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${host}/teams/team/${teamId}`);
+      const response = await fetch(`${host}/api/teams/team/${teamId}`);
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -97,7 +97,7 @@ export const getTeamById = (teamId) => {
 export const updateTeam = (teamId,{ name, userIdToAdd = "", userIdToRemove=""}) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${host}/teams/update/${teamId}`, {
+      const response = await fetch(`${host}/api/teams/update/${teamId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ export const updateTeam = (teamId,{ name, userIdToAdd = "", userIdToRemove=""}) 
 export const deleteTeam = (teamId) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${host}/teams/delete/${teamId}`, {
+      const response = await fetch(`${host}/api/teams/delete/${teamId}`, {
         method: 'DELETE',
       });
 

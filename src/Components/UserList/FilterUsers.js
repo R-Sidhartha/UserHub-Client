@@ -14,7 +14,7 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage,setshowCreateU
   }
 
   return (
-    <div className="filter-container flex  mx-4 items-center justify-center">
+    <div className="filter-container flex flex-col  mx-4 items-center justify-center md:flex-row lg:flex-row xl:flex-row ">
       <label className="my-4 mx-2 font-semibold">
         Domain:
         <select

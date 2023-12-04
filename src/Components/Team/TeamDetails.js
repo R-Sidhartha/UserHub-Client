@@ -58,7 +58,7 @@ const TeamDetails = ({ team }) => {
               <p className="font-semibold my-2">Team Members</p>
 
               <ul>
-                <div>
+                <div className="container mx-auto mt-8 flex">
                   <Users
                     userlist={team.users}
                     handleRemoveUser={handleRemoveUser}

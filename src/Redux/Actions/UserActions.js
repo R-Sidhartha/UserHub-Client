@@ -1,5 +1,5 @@
 
-const host = 'http://localhost:5000/api';
+const host = 'https://userhub-server.onrender.com';
 
 // Action Creators
 export const fetchUsersSuccess = (users) => ({
@@ -65,7 +65,7 @@ export const fetchUsers = (queryParams = {}) => {
       query.append('page', page);  // Add page to the query
       query.append('limit', limit);  // Add limit to the query
 
-      const response = await fetch(`${host}/users?${query.toString()}`, {
+      const response = await fetch(`${host}/api/users?${query.toString()}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ export const fetchUsers = (queryParams = {}) => {
 export const getUserById = (userId) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${host}/users/user/${userId}`, {
+      const response = await fetch(`${host}/api/users/user/${userId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ export const getUserById = (userId) => {
 export const createUser = (userData) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${host}/users/creatuser`, {
+      const response = await fetch(`${host}/api/users/creatuser`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ export const createUser = (userData) => {
 export const updateUser = (userId, updatedUserData) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${host}/users/updateuser/${userId}`, {
+      const response = await fetch(`${host}/api/users/updateuser/${userId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ export const updateUser = (userId, updatedUserData) => {
 export const deleteUser = (userId) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${host}/users/deleteuser/${userId}`, {
+      const response = await fetch(`${host}/api/users/deleteuser/${userId}`, {
         method: 'DELETE',
       });
 

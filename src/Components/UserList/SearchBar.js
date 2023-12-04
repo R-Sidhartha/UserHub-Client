@@ -8,7 +8,7 @@ const SearchBar = ({setSearchQuery,setPage}) => {
   };
 
   return (
-    <div className="mb-4 w-1/2 my-4">
+    <div className="mb-4 w-3/4 lg:w-1/2 xl:w-1/2 md:w-3/4 my-4">
       <input
         type="text"
         placeholder="Search by name..."
