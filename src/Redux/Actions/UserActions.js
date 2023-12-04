@@ -32,15 +32,15 @@ export const createUserSuccess = (user) => ({
   });
   
 
-export const searchUsers = (query) => ({
-  type:'SEARCH_USERS',
-  payload: query,
-});
+// export const searchUsers = (query) => ({
+//   type:'SEARCH_USERS',
+//   payload: query,
+// });
 
-export const filterUsers = (filterType, value) => ({
-  type:'FILTER_USERS',
-  payload: { filterType, value },
-});
+// export const filterUsers = (filterType, value) => ({
+//   type:'FILTER_USERS',
+//   payload: { filterType, value },
+// });
 
 // Async Action Creator
 export const fetchUsers = (queryParams = {}) => {

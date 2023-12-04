@@ -1,6 +1,6 @@
 import React from "react";
 
-const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage}) => {
+const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage,setshowCreateUserModal}) => {
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
     setFilterCriteria((prevOptions) => ({
@@ -9,10 +9,12 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage}) => {
     }));
     setPage(1)
   };
-
+  const handleShowUserModal=()=>{
+    setshowCreateUserModal(true);
+  }
 
   return (
-    <div className="filter-container flex  mx-4">
+    <div className="filter-container flex  mx-4 items-center justify-center">
       <label className="my-4 mx-2 font-semibold">
         Domain:
         <select
@@ -62,6 +64,9 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage}) => {
           <option value="false">Not Available</option>
         </select>
       </label>
+      <div>
+      <button className="font-semibold bg-gray-400 p-1 text-sm rounded-md ml-10 underline" onClick={handleShowUserModal}> Create New User</button>
+      </div>
     </div>
   );
 };

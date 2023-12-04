@@ -3,41 +3,66 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllTeams } from "../../Redux/Actions/TeamActions";
 import { useLocation } from "react-router-dom";
 import ConfirmModal from "../ConfirmModal";
+import CreateUser from "./CreateUser";
 
 const UserCard = ({
   user,
   handleRemoveUser,
   handleAddUserToTeam,
   CreateTeamwithUser,
+  handleDeleteUserwithId,
+  totalPages,
 }) => {
   const teams = useSelector((state) => state.teams.teams);
   const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [isEdit, setisEdit] = useState(false);
 
   const location = useLocation();
   const handleAddToTeam = (teamId) => {
     handleAddUserToTeam(user._id, teamId);
   };
+
   const handleCancelDelete = (e) => {
     e.preventDefault();
     setShowModal(false);
   };
+
   const handleDelete = (e) => {
     e.preventDefault();
     setShowModal(true);
   };
+
+  const editUser = () => {
+    setisEdit(true)
+    setShowEditModal(true);
+  };
+
+  const handleCloseModal = (e) => {
+    e.preventDefault();
+    setShowEditModal(false);
+  };
+
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllTeams());
   }, [dispatch]);
+
   const handleRemove = (userId) => {
     handleRemoveUser(userId);
   };
+
+  const handleDeleteUser = (userId) => {
+    handleDeleteUserwithId(userId);
+  };
+
   const handleCreateTeam = () => {
     CreateTeamwithUser(user._id);
   };
   return (
     <>
-      <div className="bg-white rounded-lg p-4 shadow-md flex flex-col relative">
+      <div className={`bg-white rounded-lg p-4 shadow-md flex flex-col relative ${showEditModal ? ' opacity-40 ':''}`}>
         <div>
           <img
             src={user.avatar}
@@ -64,43 +89,78 @@ const UserCard = ({
             {user.available ? "Available" : "Not Available"}
           </p>
         </div>
-        {location.pathname === "/" && user.available ? (
-          <label className="my-4 flex flex-col text-center">
-            Add To Team
-            <select className="p-1 rounded-md" name="team">
-              <option value="">Select</option>
-              {teams.map((team) => (
-                <option
-                  key={team._id}
-                  value={team.name}
-                  onClick={() => handleAddToTeam(team._id)}
-                >
-                  {team.name}
-                </option>
-              ))}
-              <option value="Create Team" onClick={handleCreateTeam}>
-                Create New Team
-              </option>
-            </select>
-          </label>
+        {location.pathname === "/" ? (
+          <>
+            {user.available ? (
+              <label className="my-4 flex flex-col text-center">
+                Add To Team
+                <select className="p-1 rounded-md" name="team">
+                  <option value="">Select</option>
+                  {teams.map((team) => (
+                    <option
+                      key={team._id}
+                      value={team.name}
+                      onClick={() => handleAddToTeam(team._id)}
+                    >
+                      {team.name}
+                    </option>
+                  ))}
+                  <option value="Create Team" onClick={handleCreateTeam}>
+                    Create New Team
+                  </option>
+                </select>
+              </label>
+            ) : (
+              ""
+            )}
+            <div className="absolute top-0 right-2 flex flex-row-reverse">
+              <button
+                className=" p-1 rounded-xl hover:opacity-70 "
+                onClick={handleDelete}
+              >
+                <i className="fa-solid fa-trash fa-sm opacity-60"></i>
+              </button>
+              <button
+                className=" p-1 rounded-xl hover:opacity-70 "
+                onClick={editUser}
+              >
+                <i className="fa-solid fa-pen-to-square fa-sm opacity-60"></i>
+              </button>
+            </div>
+          </>
         ) : (
           <button
             className=" p-1 rounded-xl hover:opacity-70 absolute top-0 right-2"
             onClick={handleDelete}
             disabled={showModal}
           >
-            <i className="fa-regular fa-circle-xmark fa-lg opacity-60"></i>
+            <i className="fa-regular fa-circle-xmark fa-sm opacity-60"></i>
           </button>
         )}
       </div>
-      {showModal && (
+      {showEditModal && (
+        <div className="absolute top-1/3 left-1/3">
+          <CreateUser handleCloseModal={handleCloseModal} userToEdit={user} isEdit={isEdit} totalPages={totalPages}/>
+        </div>
+      )}
+      {location.pathname === "/teams" && showModal ? (
         <ConfirmModal
           title="Remove User ?"
           message="Are you sure, you want to Remove this User from Team?"
           handleCancelDelete={handleCancelDelete}
-          handleConfirmDelete={()=>handleRemove(user._id)}
+          handleConfirmDelete={() => handleRemove(user._id)}
           handleDelete={handleDelete}
         />
+      ) : (
+        showModal && (
+          <ConfirmModal
+            title="Delete User ?"
+            message="Are you sure, you want to Delete this User Permanently from UserList?"
+            handleCancelDelete={handleCancelDelete}
+            handleConfirmDelete={() => handleDeleteUser(user._id)}
+            handleDelete={handleDelete}
+          />
+        )
       )}
     </>
   );

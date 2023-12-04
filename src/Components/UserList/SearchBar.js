@@ -12,7 +12,7 @@ const SearchBar = ({setSearchQuery,setPage}) => {
       <input
         type="text"
         placeholder="Search by name..."
-        className="border p-2 w-full"
+        className="border p-2 w-full rounded-lg"
         onChange={handleSearch}
       />
     </div>

@@ -11,9 +11,7 @@ const CreateTeam = ({UserIdToCreate,handleCloseModal}) => {
     name: newTeamName,
     userIds: [UserIdToCreate],
   };
-  console.log(UserIdToCreate)
   const handleCreateTeam = () => {
-    // Dispatch action to create a new team
     dispatch(createTeam(teamData));
     setNewTeamName("");
     navigate('/teams')

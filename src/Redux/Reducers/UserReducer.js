@@ -11,7 +11,7 @@
         return {
           ...state,
           users: action.payload,
-          filteredUsers: action.payload, // initialize filteredUsers with all users
+          filteredUsers: action.payload, 
         };
   
       case "FETCH_USER_By_Id":
@@ -29,19 +29,19 @@
   
       case 'UPDATE_USER':
         const updatedUserIndex = state.users.users.findIndex(user => user.id === action.payload.id);
-        const updatedUsers = [...state.users];
+        const updatedUsers = [...state.users.users];
         updatedUsers[updatedUserIndex] = action.payload;
   
-        const updatedFilteredUserIndex = state.filteredUsers.findIndex(
-          user => user.id === action.payload.id
-        );
-        const updatedFilteredUsers = [...state.filteredUsers];
-        updatedFilteredUsers[updatedFilteredUserIndex] = action.payload;
+        // const updatedFilteredUserIndex = state.filteredUsers.findIndex(
+        //   user => user.id === action.payload.id
+        // );
+        // const updatedFilteredUsers = [...state.filteredUsers.users];
+        // updatedFilteredUsers[updatedFilteredUserIndex] = action.payload;
   
         return {
           ...state,
           users: updatedUsers,
-          filteredUsers: updatedFilteredUsers,
+          // filteredUsers: updatedFilteredUsers,
         };
   
       case 'DELETE_USER':
@@ -56,30 +56,30 @@
           filteredUsers: updatedFilteredUsersAfterDelete,
         };
   
-      case 'SEARCH_USERS':
-        const searchTerm = action.payload.toLowerCase();
-        const searchedUsers = state.users.users.filter(user =>
-          `${user.first_name} ${user.last_name}`.toLowerCase().includes(searchTerm)
-        );
+      // case 'SEARCH_USERS':
+      //   const searchTerm = action.payload.toLowerCase();
+      //   const searchedUsers = state.users.users.filter(user =>
+      //     `${user.first_name} ${user.last_name}`.toLowerCase().includes(searchTerm)
+      //   );
   
-        return {
-          ...state,
-          filteredUsers: searchedUsers,
-        };
+      //   return {
+      //     ...state,
+      //     filteredUsers: searchedUsers,
+      //   };
   
-      case 'FILTER_USERS':
-        const { filterType, value } = action.payload;
-        const filteredUsers = state.users.users.filter(user => user[filterType] === value);
+      // case 'FILTER_USERS':
+      //   const { filterType, value } = action.payload;
+      //   const filteredUsers = state.users.users.filter(user => user[filterType] === value);
   
-        return {
-          ...state,
-          filteredUsers,
-        };
-        case 'SET_SELECTED_USER_IDS':
-          return {
-            ...state,
-            selectedUserIds: action.payload,
-          };
+      //   return {
+      //     ...state,
+      //     filteredUsers,
+      //   };
+      //   case 'SET_SELECTED_USER_IDS':
+      //     return {
+      //       ...state,
+      //       selectedUserIds: action.payload,
+      //     };
       default:
         return state;
     }

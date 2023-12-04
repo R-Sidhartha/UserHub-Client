@@ -3,10 +3,14 @@ import React from 'react'
 const Pagination2 = ({pageInfo,setPage}) => {
     const handlePageChange=(newPage)=>{
         setPage(newPage)
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth', // You can use 'auto' instead of 'smooth' for instant scrolling
+        });
     }
   return (
     pageInfo && (
-    <div className="flex justify-center mt-4">
+    <div className="flex justify-center mt-4 my-3">
     <button
       onClick={() => handlePageChange (pageInfo.currentPage-1)}
       disabled={pageInfo.currentPage === 1}
