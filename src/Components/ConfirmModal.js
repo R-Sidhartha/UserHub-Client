@@ -9,7 +9,7 @@ const ConfirmModal = ({
 
   return (
     <>
-      <div className="modal z-10  top-32 left-1/3 bg-gray-500 p-8" tabIndex="-1" >
+      <div className="modal z-10  top-32 left-1/3 bg-gray-500 p-8 rounded-lg" tabIndex="-1" >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header border-0">
