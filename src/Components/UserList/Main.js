@@ -82,19 +82,6 @@ const Main = () => {
               />
             </div>
           )}
-          {showCreateUserModal && (
-            <div className="absolute top-24 left-1/3">
-              <CreateUser
-                handleCloseModal={handleCloseModal}
-                setPage={setPage}
-                totalPages={
-                  allusers && allusers.pageInfo
-                    ? allusers.pageInfo.totalPages
-                    : 1
-                }
-              />
-            </div>
-          )}
           <div className="flex w-full justify-center">
             <div className="w-11/12 ">
               <div className="container mx-auto mt-8 flex justify-center items-center ">
@@ -130,6 +117,24 @@ const Main = () => {
             </div>
           </div>
         </div>
+        {showCreateUserModal && (
+            <div className="absolute top-24 left-1/3 bg-none opacity-100 rounded-lg">
+              <CreateUser
+                handleCloseModal={handleCloseModal}
+                setPage={setPage}
+                totalPages={
+                  allusers && allusers.pageInfo
+                    ? allusers.pageInfo.totalPages
+                    : 1
+                }
+              />
+            </div>
+          )}
+           {showCreateUserModal && (
+        <div
+          className="fixed z-10 top-0 left-0 w-full h-full bg-transparent"
+        />
+      )}
       </>
     )
   );

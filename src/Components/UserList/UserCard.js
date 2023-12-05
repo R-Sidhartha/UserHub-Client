@@ -179,6 +179,11 @@ const UserCard = ({
           />
         )
       )}
+       {showEditModal && (
+        <div
+          className="fixed z-10 top-0 left-0 w-full h-full opacity-60 bg-gray-300"
+        />
+      )}
     </>
   );
 };
