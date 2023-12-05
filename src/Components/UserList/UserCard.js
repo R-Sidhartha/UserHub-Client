@@ -65,7 +65,7 @@ const UserCard = ({
           showEditModal ? " opacity-40 " : ""
         }`}
       >
-        <div>
+        <div className="mt-3">
           <img
             src={user.avatar}
             alt={`${user.first_name} ${user.last_name}`}
@@ -79,7 +79,11 @@ const UserCard = ({
           <span className="text-gray-800 text-sm text-center">
             <span className="opacity-70 text-xs">{user.email} </span>
           </span>
-          <p className="text-gray-800  my-2 ">
+          <p className="text-gray-800 text-center">
+            {" "}
+            <span className="opacity-70 text-xs text-yellow-700">{user.gender} </span>
+          </p>
+          <p className="text-gray-800  my-2 text-sm md:text-base lg:text-base xl:text-base ">
             {" "}
             Domain: <span className="opacity-70">{user.domain} </span>
           </p>

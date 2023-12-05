@@ -14,7 +14,8 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage,setshowCreateU
   }
 
   return (
-    <div className="filter-container flex flex-col  mx-4 items-center justify-center md:flex-row lg:flex-row xl:flex-row ">
+    <div className="filter-container flex flex-col-reverse text-xs mx-2  justify-center items-center md:flex-row md:text-base">
+      <div className="flex flex-col m-0 sm:flex-row">
       <label className="my-4 mx-2 font-semibold">
         Domain:
         <select
@@ -30,6 +31,19 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage,setshowCreateU
           <option value="Management">Management</option>
           <option value="UI Designing">UI Designing</option>
           <option value="Business Development">Business Development</option>
+        </select>
+      </label>
+      <label className="my-4 mx-2 font-semibold ">
+        Availability:
+        <select
+        className="mx-2 rounded-md p-1 bg-gray-300"
+          name="available"
+          value={filterCriteria.available}
+          onChange={handleFilterChange}
+        >
+          <option value="">All</option>
+          <option value="true">Available</option>
+          <option value="false">Not Available</option>
         </select>
       </label>
       <label className="my-4 mx-2 font-semibold">
@@ -51,19 +65,7 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage,setshowCreateU
           <option value="Genderqueer">Genderqueer</option>
         </select>
       </label>
-      <label className="my-4 mx-2 font-semibold ">
-        Availability:
-        <select
-        className="mx-2 rounded-md p-1 bg-gray-300"
-          name="available"
-          value={filterCriteria.available}
-          onChange={handleFilterChange}
-        >
-          <option value="">All</option>
-          <option value="true">Available</option>
-          <option value="false">Not Available</option>
-        </select>
-      </label>
+      </div>
       <div>
       <button className="font-semibold bg-gray-400 p-1 text-sm rounded-md ml-10 underline" onClick={handleShowUserModal}> Create New User</button>
       </div>
