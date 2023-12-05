@@ -50,7 +50,7 @@ const CreateUser = ({handleCloseModal,totalPages,userToEdit,isEdit}) => {
     
       
   return (
-    <div className="max-w-md mx-auto bg-black text-white p-8 shadow-md rounded-xl mt-10 relative z-10 mb-2">
+    <div className="max-w-md mx-auto bg-gray-600 text-white p-8 shadow-md rounded-xl mt-10 relative z-10 mb-2">
       <h2 className="text-2xl font-semibold mb-4">{isEdit ? 'Edit User' : 'Create User'}</h2>
       <form className="space-y-4 " onSubmit={handleCreateUser}>
         <div className="grid grid-cols-2 gap-4">

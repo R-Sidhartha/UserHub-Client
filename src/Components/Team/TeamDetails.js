@@ -45,7 +45,7 @@ const TeamDetails = ({ team }) => {
           <>
             <div>
               <div className="flex justify-between relative items-center">
-                <h3 className="font-semibold">Team Name: {team.name}</h3>
+                <h3 className="font-semibold">Team Name: <span className="text-gray-500 mx-2 text-sm">{(team.name).toUpperCase()}</span></h3>
                 <div>
                   <button
                     className="bg-red-400 p-2 text-xs hover:opacity-60 mx-4 rounded-xl"
@@ -55,8 +55,8 @@ const TeamDetails = ({ team }) => {
                   </button>
                 </div>
               </div>
-              <p className="font-semibold my-2">Team Members</p>
-
+              <p className="font-semibold my-2">Team Members <span className="text-sm opacity-60">- {team.users.length}</span></p>
+              <span className="text-sm text-gray-400">(Note: Only Users with unique domains and who are available can be added to the team)</span>
               <ul>
                 <div className="container mx-auto mt-8 flex">
                   <Users

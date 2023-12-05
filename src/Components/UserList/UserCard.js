@@ -17,7 +17,6 @@ const UserCard = ({
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [isEdit, setisEdit] = useState(false);
-
   const location = useLocation();
   const handleAddToTeam = (teamId) => {
     handleAddUserToTeam(user._id, teamId);
@@ -34,7 +33,7 @@ const UserCard = ({
   };
 
   const editUser = () => {
-    setisEdit(true)
+    setisEdit(true);
     setShowEditModal(true);
   };
 
@@ -42,7 +41,6 @@ const UserCard = ({
     e.preventDefault();
     setShowEditModal(false);
   };
-
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -62,7 +60,11 @@ const UserCard = ({
   };
   return (
     <>
-      <div className={`bg-white rounded-lg p-4 shadow-md flex flex-col relative ${showEditModal ? ' opacity-40 ':''}`}>
+      <div
+        className={`bg-white rounded-lg p-4 shadow-md flex flex-col relative ${
+          showEditModal ? " opacity-40 " : ""
+        }`}
+      >
         <div>
           <img
             src={user.avatar}
@@ -74,12 +76,12 @@ const UserCard = ({
           <span className="text-lg font-semibold text-center">
             {user.first_name} {user.last_name}
           </span>
-          <span className="text-gray-800 text-sm ">
-            Email: <span className="opacity-70">{user.email} </span>
+          <span className="text-gray-800 text-sm text-center">
+            <span className="opacity-70 text-xs">{user.email} </span>
           </span>
           <p className="text-gray-800  my-2 ">
             {" "}
-            domain: <span className="opacity-70">{user.domain} </span>
+            Domain: <span className="opacity-70">{user.domain} </span>
           </p>
           <p
             className={`mt-2 absolute top-0 text-sm opacity-80 ${
@@ -94,18 +96,28 @@ const UserCard = ({
             {user.available ? (
               <label className="my-4 flex flex-col text-center">
                 Add To Team
-                <select className="p-1 rounded-md" name="team">
+                <select className="p-1 rounded-md bg-gray-300" name="team">
                   <option value="">Select</option>
-                  {teams.map((team) => (
-                    <option
-                      key={team._id}
-                      value={team.name}
-                      onClick={() => handleAddToTeam(team._id)}
-                    >
-                      {team.name}
-                    </option>
-                  ))}
-                  <option value="Create Team" onClick={handleCreateTeam}>
+                  {teams.map((team) => {
+                    // Check if user.domain is present in the team
+                    const isUserInTeam = team.users.some(
+                      (User) => User.domain === user.domain
+                    );
+                    // Render the option only if the user.domain is not present in the team
+                    if (!isUserInTeam) {
+                      return (
+                        <option
+                          key={team._id}
+                          value={team.name}
+                          onClick={() => handleAddToTeam(team._id)}
+                        >
+                          {team.name}
+                        </option>
+                      );
+                    }
+                    return null; 
+                  })}
+                  <option className="text-gray-400" value="Create Team" onClick={handleCreateTeam}>
                     Create New Team
                   </option>
                 </select>
@@ -140,7 +152,12 @@ const UserCard = ({
       </div>
       {showEditModal && (
         <div className="absolute top-1/3 left-1/3">
-          <CreateUser handleCloseModal={handleCloseModal} userToEdit={user} isEdit={isEdit} totalPages={totalPages}/>
+          <CreateUser
+            handleCloseModal={handleCloseModal}
+            userToEdit={user}
+            isEdit={isEdit}
+            totalPages={totalPages}
+          />
         </div>
       )}
       {location.pathname === "/teams" && showModal ? (

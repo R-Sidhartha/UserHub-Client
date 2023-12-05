@@ -18,7 +18,7 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage,setshowCreateU
       <label className="my-4 mx-2 font-semibold">
         Domain:
         <select
-        className="mx-2 rounded-md p-1"
+        className="mx-2 rounded-md p-1 bg-gray-300"
           name="domain"
           value={filterCriteria.domain}
           onChange={handleFilterChange}>
@@ -35,7 +35,7 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage,setshowCreateU
       <label className="my-4 mx-2 font-semibold">
         Gender:
         <select
-        className="mx-2 rounded-md p-1"
+        className="mx-2 rounded-md p-1 bg-gray-300"
           name="gender"
           value={filterCriteria.gender}
           onChange={handleFilterChange}
@@ -51,10 +51,10 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage,setshowCreateU
           <option value="Genderqueer">Genderqueer</option>
         </select>
       </label>
-      <label className="my-4 mx-2 font-semibold">
+      <label className="my-4 mx-2 font-semibold ">
         Availability:
         <select
-        className="mx-2 rounded-md p-1"
+        className="mx-2 rounded-md p-1 bg-gray-300"
           name="available"
           value={filterCriteria.available}
           onChange={handleFilterChange}

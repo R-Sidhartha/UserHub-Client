@@ -9,9 +9,11 @@ import { updateTeam } from "../../Redux/Actions/TeamActions";
 import CreateTeam from "../Team/CreateTeam";
 import loadinggif from "../Loading/loading.gif";
 import CreateUser from "./CreateUser";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const dispatch = useDispatch();
+  const navigate=useNavigate()
   const allusers = useSelector((state) => state.users.users);
   const [page, setPage] = useState(1);
   const [showCreateModal, setshowCreateModal] = useState(false);
@@ -41,6 +43,7 @@ const Main = () => {
           userIdsToRemove: "",
         })
       );
+      navigate('/teams')
     } catch (error) {
       console.error("Error updating team:", error);
       alert(error.message)
@@ -49,6 +52,7 @@ const Main = () => {
 
   useEffect(() => {
     // Fetch users when filterCriteria changes
+    console.log(page)
     dispatch(
       fetchUsers({ page: page, ...filterCriteria, search: searchQuery })
     );
@@ -78,7 +82,7 @@ const Main = () => {
           </div>
         )}
         {showCreateUserModal && (
-          <div>
+          <div className="absolute top-24 left-1/3">
             <CreateUser
               handleCloseModal={handleCloseModal}
               setPage={setPage}
@@ -89,8 +93,8 @@ const Main = () => {
           </div>
         )}
         <div className="flex w-full justify-center">
-          <div>
-            <div className="container mx-auto mt-8 ">
+          <div className="w-11/12 ">
+            <div className="container mx-auto mt-8 flex justify-center items-center ">
               {allusers && allusers.users && allusers.users.length > 0 ? (
                 <Users
                   userlist={allusers.users}

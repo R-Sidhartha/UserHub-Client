@@ -14,7 +14,7 @@ const TeamList = () => {
   return (
     <div>
       <h2 className="text-2xl text-center font-bold my-2">
-        Team List <span className="opacity-60">({teamList.length})</span>
+        Team List <span className="opacity-60 text-xl">({teamList.length} teams)</span>
       </h2>
       <div className="flex flex-col">
       <div>

@@ -31,17 +31,6 @@ export const createUserSuccess = (user) => ({
     payload: userIds,
   });
   
-
-// export const searchUsers = (query) => ({
-//   type:'SEARCH_USERS',
-//   payload: query,
-// });
-
-// export const filterUsers = (filterType, value) => ({
-//   type:'FILTER_USERS',
-//   payload: { filterType, value },
-// });
-
 // Async Action Creator
 export const fetchUsers = (queryParams = {}) => {
   return async (dispatch) => {
@@ -125,7 +114,6 @@ export const createUser = (userData) => {
       const newUser = await response.json();
       dispatch(createUserSuccess(newUser));
     } catch (error) {
-      // Handle error (dispatch an error action or any other logic)
       console.error('Error creating user:', error);
     }
   };
