@@ -20,7 +20,7 @@ const Users = ({userlist,handleRemoveUser,handleAddUserToTeam,CreateTeamwithUser
    return (
       <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 w-full  ${location.pathname==='/teams'? 'xl:grid-cols-6' : 'xl:grid-cols-5'} gap-8`}>
           {userlist.map((user) => (
-                <UserCard key={user.id} user={user} handleRemoveUser={handleRemoveUser} handleAddUserToTeam={handleAddUserToTeam} CreateTeamwithUser={CreateTeamwithUser} handleDeleteUserwithId={handleDeleteUserwithId} handleEdit={() => handleEdit(user)} totalPages={totalPages} teams={teams}/>
+                <UserCard key={user._id} user={user} handleRemoveUser={handleRemoveUser} handleAddUserToTeam={handleAddUserToTeam} CreateTeamwithUser={CreateTeamwithUser} handleDeleteUserwithId={handleDeleteUserwithId} handleEdit={() => handleEdit(user)} totalPages={totalPages} teams={teams}/>
               ))
             }
             {location.pathname==='/teams' &&

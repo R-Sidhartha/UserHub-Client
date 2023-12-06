@@ -52,7 +52,6 @@ const Main = () => {
 
   useEffect(() => {
     // Fetch users when filterCriteria changes
-    console.log(page);
     dispatch(
       fetchUsers({ page: page, ...filterCriteria, search: searchQuery })
     );

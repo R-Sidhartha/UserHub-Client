@@ -2,11 +2,10 @@ import React from "react";
 
 const Pagination2 = ({ pageInfo, setPage }) => {
   const handlePageChange = (newPage) => {
-    console.log(newPage)
     setPage(newPage);
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // You can use 'auto' instead of 'smooth' for instant scrolling
+      behavior: "smooth", 
     });
   };
   return (

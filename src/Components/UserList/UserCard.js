@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import ConfirmModal from "../ConfirmModal";
 import CreateUser from "./CreateUser";
@@ -10,12 +10,22 @@ const UserCard = ({
   CreateTeamwithUser,
   handleDeleteUserwithId,
   totalPages,
-  teams
+  teams,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [isEdit, setisEdit] = useState(false);
   const location = useLocation();
+  const handleSelectChange = (e) => {
+    const selectedValue = e.target.value;
+  
+    if (selectedValue === 'Create Team') {
+      handleCreateTeam(user._id);
+    } else {
+      handleAddToTeam(selectedValue);
+    }
+  };
+  
   const handleAddToTeam = (teamId) => {
     handleAddUserToTeam(user._id, teamId);
   };
@@ -48,8 +58,8 @@ const UserCard = ({
     handleDeleteUserwithId(userId);
   };
 
-  const handleCreateTeam = () => {
-    CreateTeamwithUser(user._id);
+  const handleCreateTeam = (userId) => {
+    CreateTeamwithUser(userId);
   };
   return (
     <>
@@ -74,7 +84,9 @@ const UserCard = ({
           </span>
           <p className="text-gray-800 text-center">
             {" "}
-            <span className="opacity-70 text-xs text-yellow-700">{user.gender} </span>
+            <span className="opacity-70 text-xs text-yellow-700">
+              {user.gender}{" "}
+            </span>
           </p>
           <p className="text-gray-800  my-2 text-sm md:text-base lg:text-base xl:text-base ">
             {" "}
@@ -93,28 +105,26 @@ const UserCard = ({
             {user.available ? (
               <label className="my-4 flex flex-col text-center">
                 Add To Team
-                <select className="p-1 rounded-md bg-gray-300" name="team">
+                <select
+                  className="p-1 rounded-md bg-gray-300"
+                  name="team"
+                  onChange={(e) => handleSelectChange(e)}
+                >
                   <option value="">Select</option>
                   {teams.map((team) => {
-                    // Check if user.domain is present in the team
                     const isUserInTeam = team.users.some(
                       (User) => User.domain === user.domain
                     );
-                    // Render the option only if the user.domain is not present in the team
                     if (!isUserInTeam) {
                       return (
-                        <option
-                          key={team._id}
-                          value={team.name}
-                          onClick={() => handleAddToTeam(team._id)}
-                        >
+                        <option key={team._id} value={team._id}>
                           {team.name}
                         </option>
                       );
                     }
-                    return null; 
+                    return null;
                   })}
-                  <option className="text-gray-400" value="Create Team" onClick={handleCreateTeam}>
+                  <option className="text-gray-600" value="Create Team">
                     Create New Team
                   </option>
                 </select>
@@ -176,10 +186,8 @@ const UserCard = ({
           />
         )
       )}
-       {showEditModal && (
-        <div
-          className="fixed z-10 top-0 left-0 w-full h-full opacity-60 bg-gray-300"
-        />
+      {showEditModal && (
+        <div className="fixed z-10 top-0 left-0 w-full h-full opacity-60 bg-gray-300" />
       )}
     </>
   );
