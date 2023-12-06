@@ -118,7 +118,7 @@ const Main = () => {
           </div>
         </div>
         {showCreateUserModal && (
-            <div className="absolute top-24 left-1/3 bg-none opacity-100 rounded-lg">
+            <div className="absolute top-24 left-1/5 sm:left-1/3 bg-none opacity-100 rounded-lg">
               <CreateUser
                 handleCloseModal={handleCloseModal}
                 setPage={setPage}

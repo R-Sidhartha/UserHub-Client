@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllTeams } from "../../Redux/Actions/TeamActions";
+import React, {useState } from "react";
 import { useLocation } from "react-router-dom";
 import ConfirmModal from "../ConfirmModal";
 import CreateUser from "./CreateUser";
@@ -12,8 +10,8 @@ const UserCard = ({
   CreateTeamwithUser,
   handleDeleteUserwithId,
   totalPages,
+  teams
 }) => {
-  const teams = useSelector((state) => state.teams.teams);
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [isEdit, setisEdit] = useState(false);
@@ -41,11 +39,6 @@ const UserCard = ({
     e.preventDefault();
     setShowEditModal(false);
   };
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllTeams());
-  }, [dispatch]);
 
   const handleRemove = (userId) => {
     handleRemoveUser(userId);
@@ -155,7 +148,7 @@ const UserCard = ({
         )}
       </div>
       {showEditModal && (
-        <div className="absolute top-1/3 left-1/3">
+        <div className="absolute top-1/3 left-1/5 sm:left-1/3">
           <CreateUser
             handleCloseModal={handleCloseModal}
             userToEdit={user}
