@@ -64,7 +64,7 @@ const Main = () => {
           <div className="w-full flex flex-col justify-center items-center">
             <h2 className="font-bold text-3xl my-2">User List</h2>
             <SearchBar setSearchQuery={setSearchQuery} setPage={setPage} />
-            <div className="">
+            <div className="w-11/12">
               <FilterUsers
                 filterCriteria={filterCriteria}
                 setFilterCriteria={setFilterCriteria}

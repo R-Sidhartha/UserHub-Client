@@ -68,7 +68,7 @@ const TeamDetails = ({ team }) => {
               </ul>
             </div>
             <div className="w-full flex items-center justify-center">
-              <div className="w-1/4">
+              <div className="w-11/12 md:w-1/4 my-2">
               {showModal && (
                 <ConfirmModal
                   title="Delete Team ?"

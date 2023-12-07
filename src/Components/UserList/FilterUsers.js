@@ -14,12 +14,12 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage,setshowCreateU
   }
 
   return (
-    <div className="filter-container flex flex-col-reverse text-xs mx-2  justify-center items-center md:flex-row md:text-base">
-      <div className="flex flex-col m-0 sm:flex-row">
-      <label className="my-4 mx-2 font-semibold">
+    <div className="filter-container flex flex-col-reverse text-xs mx-2  justify-center items-center md:flex-row lg:text-base">
+      <div className="flex m-0 sm:flex-row">
+      <label className="my-4 sm:mx-2 font-semibold">
         Domain:
         <select
-        className="mx-2 rounded-md p-1 bg-gray-300"
+        className="mr-1 sm:mx-2 rounded-md p-1 bg-gray-300"
           name="domain"
           value={filterCriteria.domain}
           onChange={handleFilterChange}>
@@ -33,10 +33,10 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage,setshowCreateU
           <option value="Business Development">Business Development</option>
         </select>
       </label>
-      <label className="my-4 mx-2 font-semibold ">
+      <label className="my-4 sm:mx-2 font-semibold ">
         Availability:
         <select
-        className="mx-2 rounded-md p-1 bg-gray-300"
+        className="mr-1 sm:mx-2 rounded-md p-1 bg-gray-300"
           name="available"
           value={filterCriteria.available}
           onChange={handleFilterChange}
@@ -46,10 +46,10 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage,setshowCreateU
           <option value="false">Not Available</option>
         </select>
       </label>
-      <label className="my-4 mx-2 font-semibold">
+      <label className="my-4 sm:mx-2 font-semibold">
         Gender:
         <select
-        className="mx-2 rounded-md p-1 bg-gray-300"
+        className="sm:mx-2 rounded-md p-1 bg-gray-300"
           name="gender"
           value={filterCriteria.gender}
           onChange={handleFilterChange}
@@ -67,7 +67,7 @@ const FilterUsers = ({ filterCriteria, setFilterCriteria, setPage,setshowCreateU
       </label>
       </div>
       <div>
-      <button className="font-semibold bg-gray-400 p-1 text-sm rounded-md ml-10 underline" onClick={handleShowUserModal}> Create New User</button>
+      <button className="font-semibold bg-gray-400 p-1 text-xs rounded-md sm:ml-10 underline lg:text-base" onClick={handleShowUserModal}> Create New User</button>
       </div>
     </div>
   );

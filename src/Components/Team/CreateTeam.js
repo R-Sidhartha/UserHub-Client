@@ -19,7 +19,7 @@ const CreateTeam = ({ UserIdToCreate, handleCloseModal }) => {
 
   return (
     <div className="my-3 flex justify-center">
-      <div className="modal w-1/3 bg-gray-500 rounded-2xl p-1 relative">
+      <div className="modal bg-gray-500 rounded-2xl p-1 relative w-11/12 lg:w-1/2 xl:w-1/3">
         <div className="modal-content flex justify-center flex-col items-center">
           <h2 className="font-semibold text-lg text-center mt-3">
             Create New Team

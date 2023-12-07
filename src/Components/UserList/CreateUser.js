@@ -130,6 +130,7 @@ const CreateUser = ({handleCloseModal,totalPages,userToEdit,isEdit}) => {
             <select
               id="available"
               name="available"
+              required
               value={userData.available}
               className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500  bg-gray-900"
               onChange={handleChange}
@@ -147,6 +148,7 @@ const CreateUser = ({handleCloseModal,totalPages,userToEdit,isEdit}) => {
               type="text"
               id="avatar"
               name="avatar"
+              required
               value={userData.avatar}
               className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 bg-gray-900"
               placeholder="Enter avatar URL"
@@ -169,7 +171,12 @@ const CreateUser = ({handleCloseModal,totalPages,userToEdit,isEdit}) => {
             <option value="">Select</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
-            <option value="Other">Other</option>
+            <option value="Agender">Agender</option>
+          <option value="Bigender">Bigender</option>
+          <option value="Polygender">Polygender</option>
+          <option value="Non-binary">Non-binary</option>
+          <option value="Genderfluid">Genderfluid</option>
+          <option value="Other">Other</option>
           </select>
         </div>
 
