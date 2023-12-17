@@ -1,57 +1,73 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { createUser, fetchUsers, updateUser } from '../../Redux/Actions/UserActions';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  createUser,
+  fetchUsers,
+  updateUser,
+} from "../../Redux/Actions/UserActions";
 
-const CreateUser = ({handleCloseModal,totalPages,userToEdit,isEdit}) => {
-    const [userData, setUserData] = useState({
-        first_name: isEdit ? userToEdit.first_name : '',
-        last_name: isEdit ? userToEdit.last_name : '',
-        email: isEdit ? userToEdit.email: '',
-        domain: isEdit ? userToEdit.domain : '',
-        available: isEdit ? userToEdit.available : '',
-        avatar: isEdit ? userToEdit.avatar : '',
-        gender: isEdit ? userToEdit.gender : '',
-      });
-    
-      const dispatch = useDispatch();
-      const handleChange = (event) => {
-        const { name, value } = event.target;
-        setUserData((prev) => ({ ...prev, [name]: value }));
-      };
-      const handleCreateUser = async (e) => {
-        e.preventDefault();
-      
-        try {
-           // If isEdit is provided, update the user
+const CreateUser = ({
+  handleCloseModal,
+  totalPages,
+  userToEdit,
+  isEdit,
+  userlist,
+}) => {
+  const getRandomAvatar = () => {
+    const randomIndex = Math.floor(Math.random() * userlist.length);
+    return userlist[randomIndex].avatar;
+  };
+  const [userData, setUserData] = useState({
+    first_name: isEdit ? userToEdit.first_name : "",
+    last_name: isEdit ? userToEdit.last_name : "",
+    email: isEdit ? userToEdit.email : "",
+    domain: isEdit ? userToEdit.domain : "",
+    available: isEdit ? userToEdit.available : "",
+    avatar: getRandomAvatar(),
+    gender: isEdit ? userToEdit.gender : "",
+  });
+  
+
+  const dispatch = useDispatch();
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCreateUser = async (e) => {
+    e.preventDefault();
+
+    try {
+      // If isEdit is provided, update the user
       if (isEdit) {
         await dispatch(updateUser(userToEdit._id, userData));
-      } 
-        await dispatch(createUser(userData));
-    if (isEdit) {
+      }
+      await dispatch(createUser(userData));
+      if (isEdit) {
         dispatch(fetchUsers({ page: Math.floor(userToEdit.id / 20) + 1 }));
+      }
+      dispatch(fetchUsers({ page: totalPages }));
+      // Clear userData after submission
+      setUserData({
+        first_name: "",
+        last_name: "",
+        email: "",
+        domain: "",
+        available: "",
+        avatar: "",
+        gender: "",
+      });
+
+      handleCloseModal(e);
+    } catch (error) {
+      console.error("Error creating/updating user:", error);
     }
-    dispatch(fetchUsers({ page: totalPages}));
-          // Clear userData after submission
-          setUserData({
-            first_name: '',
-            last_name: '',
-            email: '',
-            domain: '',
-            available: '',
-            avatar: '',
-            gender: '',
-          });
-      
-          handleCloseModal(e);
-        } catch (error) {
-          console.error('Error creating/updating user:', error);
-        }
-      };
-    
-      
+  };
   return (
     <div className="max-w-md mx-auto bg-black text-white p-8 shadow-md rounded-xl mt-10 relative z-50 mb-2">
-      <h2 className="text-2xl font-semibold mb-4">{isEdit ? 'Edit User' : 'Create User'}</h2>
+      <h2 className="text-2xl font-semibold mb-4">
+        {isEdit ? "Edit User" : "Create User"}
+      </h2>
       <form className="space-y-4 " onSubmit={handleCreateUser}>
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -98,7 +114,7 @@ const CreateUser = ({handleCloseModal,totalPages,userToEdit,isEdit}) => {
             name="email"
             value={userData.email}
             minLength={8}
-              required
+            required
             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 bg-gray-900"
             placeholder="Enter email"
             onChange={handleChange}
@@ -115,13 +131,34 @@ const CreateUser = ({handleCloseModal,totalPages,userToEdit,isEdit}) => {
             name="domain"
             value={userData.domain}
             minLength={2}
-              required
+            required
             className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 bg-gray-900"
             placeholder="Enter domain"
             onChange={handleChange}
           />
         </div>
-
+        <div>
+          <label htmlFor="gender" className="block text-sm font-medium ">
+            Gender
+          </label>
+          <select
+            id="gender"
+            name="gender"
+            value={userData.gender}
+            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 bg-gray-900"
+            onChange={handleChange}
+          >
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Agender">Agender</option>
+            <option value="Bigender">Bigender</option>
+            <option value="Polygender">Polygender</option>
+            <option value="Non-binary">Non-binary</option>
+            <option value="Genderfluid">Genderfluid</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="available" className="block text-sm font-medium ">
@@ -140,60 +177,21 @@ const CreateUser = ({handleCloseModal,totalPages,userToEdit,isEdit}) => {
               <option value="false">Not Available</option>
             </select>
           </div>
-          <div>
-            <label htmlFor="avatar" className="block text-sm font-medium ">
-              Avatar URL
-            </label>
-            <input
-              type="text"
-              id="avatar"
-              name="avatar"
-              required
-              value={userData.avatar}
-              className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 bg-gray-900"
-              placeholder="Enter avatar URL"
-              onChange={handleChange}
-            />
-          </div>
         </div>
-
-        <div>
-          <label htmlFor="gender" className="block text-sm font-medium ">
-            Gender
-          </label>
-          <select
-            id="gender"
-            name="gender"
-            value={userData.gender}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500 bg-gray-900"
-            onChange={handleChange}
-          >
-            <option value="">Select</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Agender">Agender</option>
-          <option value="Bigender">Bigender</option>
-          <option value="Polygender">Polygender</option>
-          <option value="Non-binary">Non-binary</option>
-          <option value="Genderfluid">Genderfluid</option>
-          <option value="Other">Other</option>
-          </select>
-        </div>
-
         <button
           type="submit"
           className="bg-indigo-500 text-white p-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:shadow-outline-indigo active:bg-indigo-800"
         >
-           {isEdit ? 'Update User' : 'Create User'}
+          {isEdit ? "Update User" : "Create User"}
         </button>
       </form>
       <div>
-      <button
-            className=" p-1 rounded-xl hover:opacity-70 absolute top-0 right-2"
-            onClick={handleCloseModal}
-          >
-            <i className="fa-regular fa-circle-xmark fa-lg opacity-60"></i>
-          </button>
+        <button
+          className=" p-1 rounded-xl hover:opacity-70 absolute top-0 right-2"
+          onClick={handleCloseModal}
+        >
+          <i className="fa-regular fa-circle-xmark fa-lg opacity-60"></i>
+        </button>
       </div>
     </div>
   );

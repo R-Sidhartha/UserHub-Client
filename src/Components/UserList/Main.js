@@ -126,6 +126,7 @@ const Main = () => {
                     ? allusers.pageInfo.totalPages
                     : 1
                 }
+                userlist={allusers.users}
               />
             </div>
           )}
